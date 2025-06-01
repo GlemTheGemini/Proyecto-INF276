@@ -17,8 +17,29 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from gym_app.views import home
+from reserva.views import reserva, guardar_reserva
+from login.views import login_user, logout_user, register_user
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', home, name='home'),
+    path('', home, name='home'),
+
+
+
+    #Reserva
+    path ('reserva', reserva, name='reserva'),
+    path('guardar_reserva/', guardar_reserva, name='guardar_reserva'),
+
+
+
+    #Login
+    path ('login', login_user, name='login'),
+    path('logout', logout_user, name = "logout"),
+    path('register_user', register_user, name='register_user'),
+
+
+
+
 ]

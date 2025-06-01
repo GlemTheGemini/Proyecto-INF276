@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+<body>
+    {% block content %}
+
+    <!-- Encabezado intermedio -->
+    <div style="background-color: white; padding: 1.5em 0;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- Logo UTFSM -->
+            <div>
+                <img src="https://defider.usm.cl/wp-content/uploads/2021/11/defider.svg" alt="UTFSM DEFIDER Logo" style="height: 80px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <style>
+        .banner {
+            background-image: url("https://defider.usm.cl/wp-content/uploads/2023/03/fut-scaled.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 2.5em;
+            text-align: left;
+        }
+
+        .form-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+        }
+
+        .form-container {
+            background: #f8f9fa;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .submit-button {
+            margin-top: 1em;
+        }
+    </style>
+
+    <section class="banner">
+        <div class="container">
+            <h1>Sistema de reservas</h1>
+        </div>
+    </section>
+
+    <!-- Formulario centrado -->
+    <div class="form-wrapper">
+        <form method="POST" action="{% url 'guardar_reserva' %}" class="form-container">
+            {% csrf_token %}
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelect" name="bloque" required>
+                    <option value="" disabled selected>Elige</option>
+                    <option value="1">1-2</option>
+                    <option value="2">3-4</option>
+                    <option value="3">5-6</option>
+                    <option value="4">7-8</option>
+                    <option value="5">9-10</option>
+                    <option value="6">11-12</option>
+                    <option value="7">13-14</option>
+                    <option value="8">15-16</option>
+                    <option value="9">17-18</option>
+                </select>
+                <label for="floatingSelect">Selecciona el bloque</label>
+            </div>
+            <div class="submit-button text-center">
+                <button type="submit" class="btn btn-primary">Reservar</button>
+            </div>
+        </form>
+    </div>
+
+    {% endblock %}
+</body>

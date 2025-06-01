@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="w-100" style="max-width: 400px;">
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                Hubo un error, inténtalo nuevamente.
+            </div>
+        {% endif %}
+
+        <h1 id="login-title" class="text-center mb-4">Registrarse</h1>
+
+        <form action="{% url 'register_user' %}" method="POST" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-secondary w-100">Enviar</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #ffffff;
+    }
+
+    #login-title {
+        color: #000000;
+    }
+</style>
+{% endblock %}
