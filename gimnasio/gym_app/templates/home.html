@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+<body>
+    {% block content%}
+
+    <!-- Encabezado intermedio -->
+    <div style="background-color: white; padding: 1.5em 0;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- Logo UTFSM -->
+            <div>
+                <img src="https://defider.usm.cl/wp-content/uploads/2021/11/defider.svg" alt="UTFSM DEFIDER Logo" style="height: 80px;">
+            </div>
+
+            
+
+            <!-- Botón de acceso -->
+             {% if request.user.is_authenticated %}
+            <div>
+                <a class="btn btn-primary rounded-pill d-flex align-items-center" style="background-color: #005e90; border-color: #005e90;" href="{% url 'reserva' %}">
+                    Reservar Bloque
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <style>
+        .banner {
+            background-image: url("https://defider.usm.cl/wp-content/uploads/2023/03/fut-scaled.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 2.5em; /* Reduced vertical padding */
+            text-align: left;
+        }
+    </style>
+    <section class="banner">
+        <div class="container">
+            <h1>Sala de Musculación: San Joaquín</h1>
+
+        </div>
+    </section>
+
+
+    {% endblock %}
+</body>
+

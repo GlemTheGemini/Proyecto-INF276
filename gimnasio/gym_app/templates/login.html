@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+  <div class="contador p-4 shadow bg-light rounded" style="width: 100%; max-width: 400px;">
+    <h1 id="login-title" class="text-center mb-4">Login</h1> 
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="username" class="form-label">Usuario</label>
+        <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" name="password" id="password" required>
+      </div>
+      <div class="d-grid">
+        <input type="submit" value="Enviar" class="btn btn-secondary">
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

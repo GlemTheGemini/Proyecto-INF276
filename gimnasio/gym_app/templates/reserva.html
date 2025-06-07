@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+
+<body>
+    {% block content %}
+
+    <!-- Encabezado intermedio -->
+    <div style="background-color: white; padding: 1.5em 0;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- Logo UTFSM -->
+            <div>
+                <img src="https://defider.usm.cl/wp-content/uploads/2021/11/defider.svg" alt="UTFSM DEFIDER Logo" style="height: 80px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <style>
+        .banner {
+            background-image: url("https://defider.usm.cl/wp-content/uploads/2023/03/fut-scaled.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 2.5em;
+            text-align: left;
+        }
+
+        .form-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+        }
+
+        .form-container {
+            background: #f8f9fa;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .submit-button {
+            margin-top: 1em;
+        }
+    </style>
+
+    <section class="banner">
+        <div class="container">
+            <h1>Sistema de reservas</h1>
+        </div>
+    </section>
+
+    <!-- Formulario centrado -->
+    <div class="form-wrapper">
+    {% if tiene_reserva %}
+        <p style="color: green;">Hola {{ user }}, tu reserva ya está hecha! ✅.</p>
+
+    {% else %}
+
+    <!-- Nuevo contenedor para alinear tabla y formulario -->
+    <div class="content-flex">
+        <!-- Tabla a la izquierda -->
+        <div class="tabla-container">
+            <table>
+                <caption>Bloques disponibles</caption>
+                <tr>
+                    {% for bloque in bloques %}
+                        <td>{{ bloque.1 }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+
+        <!-- Formulario a la derecha -->
+        <form method="POST" action="{% url 'guardar_reserva' %}" class="form-container">
+            {% csrf_token %}
+            <div class="form-floating">
+                {% if bloques %}
+                    <p style="color: black; text-align: center;">Selecciona un horario.</p>
+                    <select class="form-select" id="floatingSelect" name="bloque" required>
+                        <option value="" disabled selected>Elige</option>
+                        {% for bloque in bloques %}
+                            <option value="{{ bloque.0 }}">{{ bloque.1 }}</option>
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <p>No hay bloques disponibles actualmente.</p>
+                {% endif %}
+            </div>
+            <div class="submit-button text-center">
+                <button type="submit" class="btn btn-primary">Reservar</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+/* Flex container */
+.content-flex {
+    display: flex;
+    gap: 2rem; /* Espacio entre tabla y formulario */
+    align-items: flex-start;
+    margin-top: 1em;
+}
+
+/* Tabla */
+table {
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    width: auto;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+caption {
+    caption-side: top;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+/* Formulario */
+.form-container {
+    min-width: 300px;
+    max-width: 400px;
+}
+
+/* Alinear botón */
+.submit-button {
+    margin-top: 1em;
+}
+</style>
+
+    {% endblock %}
+</body>
